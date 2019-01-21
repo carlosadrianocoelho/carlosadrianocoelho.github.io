@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="propeller" content="26563b6392e549181dd5229017a00384">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+
+<body class="w3-light-grey">
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Carlos Adriano</b></h1>
+  <p><span class="w3-tag">Bem vindo</span></p>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    
+    <div class="w3-container">
+      <h3><b>PRIMEIRO C&Oacute;DIGO USANDO GOOGLE APPS SCRIPT</b></h3>
+      <h5><span class="w3-opacity">18 de Janeiro de 2019</span></h5>
+    </div>
+    <div class="w3-container">
+    <p>
+    A Google mant&eacute;m um site para desenvolvedores no endere&ccedil;o <a href="https://developers.google.com/" style="color:blue;text-decoration:none">https://developers.google.com/</a>
+	    onde pode-se encontrar as referências e exemplos dos seus produtos e servi&ccedil;os.
+	    Neste site, pode-se encontrar algumas informa&ccedil;&oacute;es, refer&ecirc;ncias e exemplos.
+	    O primeiro script disponibilizado mostra um c&oacute;digo que cria um documento (Google Doc) 
+	    no GDrive (Google Drive) e envia um email para o Gmail com um link que permite acessar esse documento.
+    </p>
+    <p>
+	    Passo 1:<br />
+	    Acesse <a href="https://script.google.com/" style="color:blue;text-decoration:none">https://script.google.com/</a> para abrir o editor de script e 
+	    click em Start Scripting. &Eacute; preciso ter uma conta Google (crie uma se n&atilde;o tiver ainda).
+    </p>
+    <p>
+	    Passo 2:<br />
+	    Uma tela pergunta que tipo de projeto se quer criar. Clique em projeto em branco (blank project).
+    </p>
+    <p>
+	    Passo 3:<br />
+	    Delete o c&oacute;digo gerado automaticamente, copie o c&oacute;digo abaixo e cole no editor do 
+	    Apps Script.
+    </p>
+	<pre style="background-color:black;color:white;overflow:scroll;float:left;width:100%">
+<span style="color:red">/**
+ * Creates a Google Doc and sends an email to the current user with a link to the doc.
+ */</span>
+<span style="color:blue">function</span> createAndSendDocument() {
+<span style="color:red">  // Create a new Google Doc named 'Hello, world!'</span>
+  <span style="color:blue">var</span> doc = <span style="color:purple">DocumentApp</span>.create(<span style="color:green">'Hello, world!'</span>);
+
+  <span style="color:red">// Access the body of the document, then add a paragraph.</span>
+  doc.getBody().appendParagraph(<span style="color:green">'This document was created by Google Apps Script.'</span>);
+
+  <span style="color:red">// Get the URL of the document.</span>
+  <span style="color:blue">var</span> url = doc.getUrl();
+
+  <span style="color:red">// Get the email address of the active user - that's you.</span>
+  <span style="color:blue">var</span> email = <span style="color:purple">Session</span>.getActiveUser().getEmail();
+
+  <span style="color:red">// Get the name of the document to use as an email subject line.</span>
+  <span style="color:blue">var</span> subject = doc.getName();
+
+  <span style="color:red">// Append a new string to the "url" variable to use as an email body.</span>
+  <span style="color:blue">var</span> body = <span style="color:green">'Link to your doc: '</span> + url;
+
+  <span style="color:red">// Send yourself an email with a link to the document.</span>
+  <span style="color:purple">GmailApp</span>.sendEmail(email, subject, body);
+}
+</pre>
+    <p>
+      Passo 4:<br />
+	    V&aacute; ao menu e clique em <b>Arquivo->Salvar</b>, nomeie seu arquivo e clique em OK.
+    </p>
+    <p>
+	Passo 5:<br />
+	    Para executar o script v&aacute; ao menu e clique em <b>Run->CreateandSendDocument</b>.
+	    A execuc&ccedil;&atilde;o do script requer a sua autoriza&ccedil;&atilde;o, clique OK para dar premiss&atilde;o.
+    </p>
+    <p>
+	Passo 6:<br />
+	    Depois que o script terminar de executar, abra o gmail e veja que recebeu um novo email com um link(o link do novo documento).
+	    Por fim, abra o GDrive e veja que tem dois arquivos novos, o do documento e o do script.
+    </p>
+    <p>
+	    Esse exemplo mostra que a linguagem apps script &eacute; muito &uacute;til e vale a pena aprend&ecirc;-la.
+	    Para ver a postagem oficial, acesse o artigo <a href="https://developers.google.com/apps-script/overview" style="color:blue;text-decoration:none">Overview of Apps Script</a>.
+	    </p>
+	<div class="w3-row">
+        <div class="w3-col m8 s12">
+        </div>
+    </div>
+	<hr>
+    </div>
+  </div>
+  <hr>
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="adriano_foto_editada.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>Carlos Adriano</b></h4>
+      <p>Estudante de Engenharia El&eacute;trica e programador.</p>
+    </div>
+  </div><hr>
+   
+  <hr>
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+
+</footer>
+
+</body>
+</html>
