@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Carlos Adriano - Recebendo dados e armazenando na planilha Google</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="propeller" content="26563b6392e549181dd5229017a00384">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+
+<body class="w3-light-grey">
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <a href="index.html" style="text-decoration:none"><h1><b>Carlos Adriano</b></h1></a>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    
+    <div class="w3-container">
+      <h3><b>RECEBENDO DADOS E ARMAZENANDO NA PLANILHA GOOGLE</b></h3>
+      <h5><span class="w3-opacity">21 de Janeiro de 2019</span></h5>
+    </div>
+    <div class="w3-container">
+    <p>
+    Com a linguagem Apps Script &eacute; poss&iacute;vel utilizar as planilhas Google como um banco de dados online 
+	para o seu aplicativo mobile, para o seu site ou para qualquer aplica&ccedil;&atilde;o que voc&ecirc; esteja desenvolvendo 
+	ou pense em desenvolver e que precise de um banco de dados dispon&iacute;vel o tempo todo para ser acessado pelos seus 
+	usu&aacute;rios. Neste post, ser&aacute; mostrado como receber dados e guard&aacute;-los na nuvem.
+    </p>
+    <p>
+	Os dados são enviados para o web app no formato json(javascript object notation) usando uma requisi&ccedil;&atilde;o 
+	http com o m&eacute;todo POST. O web app processa essa requisi&ccedil;&atilde;o dentro da função doPost(<span style="color:blue">e</span>). 
+	O <span style="color:blue">e</span> entre par&ecirc;nteses armazena o dado recebido que voc&ecirc; quer guardar na planilha Google. Esse valor &eacute; 
+	retornado para a fun&ccedil;&atilde;o receberDados. O c&oacute;digo est&aacute; bem comentado de forma que &eacute; 
+	poss&iacute;vel entend&ecirc;-lo com facilidade.
+    </p>
+    <p>
+	O web app come&ccedil;a transformando o dado no formato json em um objeto javascript, extrai a chave e o valor do json 
+	e armazena nas vari&aacute;veis chave e valor, respectivamente. As vari&aacute;veis x e y representam a linha e a 
+	coluna e ambas come&ccedil;am com 1 para iniciar na primeira c&eacute;lula. A rotina do...while verifica se a primeira 
+	c&eacute;lula da planilha est&aacute; vazia, se estiver, o dado &eacute; colocado nesta c&eacute;lula, se n&atilde;o 
+	estiver, a pr&oacute;xima c&eacute;lula da coluna &eacute; verificada at&eacute; que uma c&eacute;lula vazia seja 
+	encontrada.
+    </p>
+    <p>
+	Para que o web app funcione corretamente, primeiro abra o Google Drive e crie uma nova planilha. D&ecirc; um nome 
+	para ela, por exemplo, "planilhaTeste" e mude o nome para dados no local mostrado em vermelho na figura.
+    </p>
+	<img src="recebendo_dados_e_armazenando_na_planilha_google_img1.jpg" style="width:100%">
+	<p>
+	Para inserir os dados na planilha que voc&ecirc; criou, &eacute; preciso usar o id dela. O id da planilha est&aacute; 
+	marcado em azul na figura e fica localizado entre <span style="color:blue">d/</span> e <span style="color:blue">/edit</span>. Na planilha da figura, o id &eacute; <span style="color:blue">1161NL1XON6LWXMaNIgNOnO6i5Ju6fT3PdcXT0rp6KNc</span>.
+	</p>
+	<img src="recebendo_dados_e_armazenando_na_planilha_google_img2.jpg" style="width:100%">
+	<p>
+	Crie um projeto no Google Apps Script e cole o c&oacute;digo abaixo. Para ver como criar um projeto, 
+	veja este <a href="criando_e_publicando_seu_web_app_com_apps_script.html" style="text-decoration:none;color:blue">post</a>.
+	</p>
+<pre style="background-color:black;color:white;overflow:scroll;float:left;width:100%">
+<span style="color:purple">function</span> doPost(<span style="color:blue">e</span>){
+
+	 <span style="color:purple">return</span> receberDados(<span style="color:blue">e</span>);
+	  
+}  
+
+<span style="color:purple">function</span> receberDados(<span style="color:blue">request</span>) {
+	<span style="color:purple">var</span> <span style="color:blue">output</span>  = ContentService.createTextOutput();
+	  
+	<span style="color:purple">var</span> <span style="color:blue">objetoJS</span> = JSON.parse(<span style="color:blue">request</span>.postData.contents);<span style="color:red">//transforma json em objeto javascript</span>
+	  
+	<span style="color:purple">for(var</span> ><span style="color:blue">k</span> in <span style="color:blue">objetoJS</span>)><span style="color:blue">k</span> in <span style="color:blue">objetoJS</span>)<span style="color:red">//percorre o objeto e extrai a chave</span>
+	  <span style="color:purple">var</span> chave = k;
+	  
+	<span style="color:purple">for</span>(<span style="color:blue">var</span><span style="color:blue">k</span> in <span style="color:blue">objetoJS</span>)<span style="color:red">//percorre o objeto e extrai o valor</span>
+		<span style="color:purple">var</span> <span style="color:blue">valor</span> = <span style="color:blue">objetoJS[k]</span>;
+	  
+	<span style="color:purple">var</span> <span style="color:blue">id</span> = "<span style="color:green">1161NL1XON6LWXMaNIgNOnO6i5Ju6fT3PdcXT0rp6KNc</span>";<span style="color:red">//esse tem que ser o id da sua planilha</span>
+	  
+	<span style="color:blue">//abre a planilha Google prlo seu id</span>
+	  
+	<span style="color:purple">var</span> <span style="color:blue">ss</span> = SpreadsheetApp.openById(<span style="color:blue">id</span>);
+	<span style="color:purple">var</span> <span style="color:blue">sheet</span> = <span style="color:blue">ss</span>.getSheetByName("<span style="color:blue">dados</span>");
+	  
+	<span style="color:purple">var</span> <span style="color:blue">x</span> = 1;<span style="color:red">//linha da planilha</span>
+	<span style="color:purple">var</span> <span style="color:blue">y</span> = 1;<span style="color:red">//coluna da planilha</span>
+	<span style="color:purple">var</span> <span style="color:blue">celula_vazia</span> = "";
+	  
+	<span style="color:red">//esta rotina verifica se a celula esta vazia,</span>
+	<span style="color:red">//quando encontra uma celula vazia ela adiciona o valor recebido</span>
+	<span style="color:purple">do</span>{
+	  <span style="color:purple">if</span>(<span style="color:blue">celula_vazia</span> === <span style="color:blue">sheet</span>.getRange(<span style="color:blue">x, y</span>).getValue())
+	  {
+		<span style="color:blue">sheet</span>.getRange(<span style="color:blue">y, x</span>).setValue(<span style="color:blue">valor</span>);
+		<span style="color:purple">break</span>;
+	  }
+	  <span style="color:blue">x</span>++;
+	}<span style="color:purple">while</span>(1);
+	  
+	<span style="color:blue">output</span>.setMimeType(ContentService.MimeType.JSON);
+	  
+	<span style="color:purple">return</span> <span style="color:blue">output</span>;
+
+}
+	</pre>
+    <p>
+    Depois que o seu web app estiver publicado, envie dados no formato json usando o endere&ccedil;o do web app e, se tudo tiver 
+	dado certo, os dados ficar&atilde;o armazenados online na planilha que voc&ecirc; criou. Recomendo, come&ccedil;ar enviando 
+	somente um dado no formato json, como no exemplo a seguir. Para saber como enviar dados no formato json usando um aplicativo, 
+	veja este <a href="aprendendo_a_usar_o_aplicativo_postman.html" style="text-decoration:none;color:blue">post</a>.
+    </p>
+<pre style="background-color:black;color:white;overflow:scroll;float:left;width:100%">
+{
+	"<span style="color:blue">carro</span>":"<span style="color:blue">corsa</span>"
+}
+</pre>
+	<div class="w3-row">
+        <div class="w3-col m8 s12">
+        </div>
+    </div>
+	<hr>
+    </div>
+  </div>
+  <hr>
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="adriano_foto_editada.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>Carlos Adriano</b></h4>
+      <p>Estudante de Engenharia El&eacute;trica e programador.</p>
+    </div>
+  </div><hr>
+   
+  <hr>
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+
+</footer>
+
+</body>
+</html>
