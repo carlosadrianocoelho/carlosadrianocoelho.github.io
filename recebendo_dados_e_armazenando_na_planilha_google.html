@@ -42,6 +42,16 @@ and is wrapped around the whole page content, except for the footer in this exam
 	ou pense em desenvolver e que precise de um banco de dados dispon&iacute;vel o tempo todo para ser acessado pelos seus 
 	usu&aacute;rios. Neste post, ser&aacute; mostrado como receber dados e guard&aacute;-los na nuvem.
     </p>
+	    <script type="text/javascript">
+		  ( function() {
+		    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+		    var unit = {"calltype":"async[2]","publisher":"carlosadrianocoelho","width":300,"height":250,"sid":"Chitika Default"};
+		    var placement_id = window.CHITIKA.units.length;
+		    window.CHITIKA.units.push(unit);
+		    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+		}());
+	  </script>
+	  <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
     <p>
 	Os dados são enviados para o web app no formato json(javascript object notation) usando uma requisi&ccedil;&atilde;o 
 	http com o m&eacute;todo POST. O web app processa essa requisi&ccedil;&atilde;o dentro da função doPost(<span style="color:blue">e</span>). 
@@ -148,9 +158,21 @@ and is wrapped around the whole page content, except for the footer in this exam
       <h4><b>Carlos Adriano</b></h4>
       <p>Estudante de Engenharia El&eacute;trica e programador.</p>
     </div>
-  </div><hr>
-   
-  <hr>
+  </div>
+
+  <!-- Chitika Ad -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <script type="text/javascript">
+  ( function() {
+    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+    var unit = {"calltype":"async[2]","publisher":"carlosadrianocoelho","width":300,"height":600,"sid":"Chitika Default"};
+    var placement_id = window.CHITIKA.units.length;
+    window.CHITIKA.units.push(unit);
+    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+	}());
+  </script>
+  <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
+  </div>
   
 <!-- END Introduction Menu -->
 </div>
